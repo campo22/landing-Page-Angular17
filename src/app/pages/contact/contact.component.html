@@ -1,1 +1,46 @@
-<p>contact works!</p>
+<div class="container">
+  <form [formGroup]="contactForm" class="row g-3 needs-validation" novalidate (submit)="enviar($event)">
+
+    <!-- Email Field -->
+    <div class="col-md-4">
+      <label for="validationServer01" class="form-label">Email</label>
+      <input type="text" class="form-control" id="validationServer01" placeholder="Email@gmail.com"
+        formControlName="email" [ngClass]="{
+          'is-valid': !hasError('email', 'required') && !hasError('email', 'email') && contactForm.get('email')?.touched,
+          'is-invalid': hasError('email', 'required') || hasError('email', 'email')
+        }">
+
+      <!-- Simulación de @if usando *ngIf -->
+      <div *ngIf="hasError('email', 'required')" class="invalid-feedback">
+        El email es requerido.
+      </div>
+      <div *ngIf="hasError('email', 'email')" class="invalid-feedback">
+        El formato del email no es válido.
+      </div>
+    </div>
+
+    <!-- Message Field -->
+    <div class="col-md-4">
+      <label for="validationServer02" class="form-label">Mensaje</label>
+      <input type="text" class="form-control" id="validationServer02" placeholder="Escribe un mensaje"
+        formControlName="message" [ngClass]="{
+          'is-valid': !hasError('message', 'required') && !hasError('message', 'minlength') && contactForm.get('message')?.touched,
+          'is-invalid': hasError('message', 'required') || hasError('message', 'minlength')
+        }">
+
+      <!-- Simulación de @if usando *ngIf -->
+      <div *ngIf="hasError('message', 'required')" class="invalid-feedback">
+        El mensaje es requerido.
+      </div>
+      <div *ngIf="hasError('message', 'minlength')" class="invalid-feedback">
+        El mensaje debe contener al menos 5 caracteres.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit">Enviar</button>
+    </div>
+
+  </form>
+</div>

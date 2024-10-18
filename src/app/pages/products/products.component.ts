@@ -1,11 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'; // Cambia 'express' por '@angular/router'
 import { IProducto } from '../../../Models/product.model';
 
 @Component({
   selector: 'app-products',
   standalone: true,
+  imports: [CommonModule],  // Elimina HttpClientModule
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
@@ -13,13 +15,9 @@ export class ProductsComponent implements OnInit {
   productList: IProducto[] = [];
   private _apiService = inject(ApiService);
   private _router = inject(Router);
-  private initialized = false;  // Añadido para controlar la inicialización
 
   ngOnInit(): void {
-    if (this.initialized) return;  // Verifica si ya se ha inicializado
-
     console.log("ngOnInit called");
-    this.initialized = true;  // Marca como inicializado
 
     this._apiService.getProducts().subscribe({
       next: (data: IProducto[]) => {
@@ -31,7 +29,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  navigate(id: number): void {
+  navigate(id: number): void {  // Corrige 'navegate' a 'navigate'
     this._router.navigate(['/products', id]);
   }
 }
