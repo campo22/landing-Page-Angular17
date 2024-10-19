@@ -5,9 +5,9 @@ import { RouterLink, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterModule],  // Elimina HttpClientModule
+  imports: [CommonModule, RouterLink, RouterModule], 
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'] // Asegúrate de que sea styleUrls
+  styleUrls: ['./app.component.css'] 
 })
 export class AppComponent {
   menuOpion: string = ''
